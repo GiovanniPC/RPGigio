@@ -1,0 +1,39 @@
+body {
+    background-image: url('../images/fundomaster.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#game-board {
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+}
+.menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.button-start {
+    background-image: url('../images/button.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 7.4vw;
+    width: 20%;
+    color:white;
+    font-size: 60px;
+    font-family: fantasy;
+    margin-top: 10px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#text {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    color:white;
+    font-size: 60px;
+    font-family: fantasy;
+}

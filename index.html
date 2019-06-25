@@ -4,10 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
     <title>RPGigio</title>
-    <script src="rpg.js"></script>
 </head>
 <body>
-    
+    <div id="game-board">
+    <p hidden> <img id="knight-frame2" src="images/knight-frame2.png" alt=""></p>
+    <p hidden> <img id="knight-frame3" src="images/knight-frame3.png" alt=""></p>
+    <p hidden> <img id="knight-frame4" src="images/knight-frame4.png" alt=""></p>
+    <p hidden> <img id="knight-frame5" src="images/knight-frame5.png" alt=""></p>
+    <p hidden> <img id="knight-moving0" src="images/knight-moving0.png" alt=""></p>
+    <p hidden> <img id="knight-moving1" src="images/knight-moving1.png" alt=""></p>
+    <p hidden> <img id="knight-attack1" src="images/knight-attack1.png" alt=""></p>
+    <p hidden> <img id="knight-attack2" src="images/knight-attack2.png" alt=""></p>
+    <p hidden> <img id="knight-attack3" src="images/knight-attack3.png" alt=""></p>
+    <p hidden> <img id="knight-attack4" src="images/knight-attack4.png" alt=""></p>
+    <p hidden> <img id="knight-attack5" src="images/knight-attack5.png" alt=""></p>
+    <p hidden> <img id="knight-attack6" src="images/knight-attack6.png" alt=""></p>
+    <p hidden> <img id="knight-attack7" src="images/knight-attack7.png" alt=""></p>
+    <p hidden> <img id="knight-hurt" src="images/knight-hurt.png" alt=""></p>
+
+    <p hidden> <img id="slime-idle-0" src="images/slime-idle-0.png" alt=""></p>
+    <p hidden> <img id="slime-idle-1" src="images/slime-idle-1.png" alt=""></p>
+    <p hidden> <img id="slime-idle-2" src="images/slime-idle-2.png" alt=""></p>
+    <p hidden> <img id="slime-idle-3" src="images/slime-idle-3.png" alt=""></p>
+    <p hidden> <img id="slime-hurt-0" src="images/slime-hurt-0.png" alt=""></p>
+    <p hidden> <img id="slime-hurt-1" src="images/slime-hurt-1.png" alt=""></p>
+    <p hidden> <img id="slime-hurt-2" src="images/slime-hurt-2.png" alt=""></p>
+    <p hidden> <img id="slime-hurt-3" src="images/slime-hurt-3.png" alt=""></p>
+    <p hidden> <img id="slime-run-0" src="images/slime-run-0.png" alt=""></p>
+    <p hidden> <img id="slime-run-1" src="images/slime-run-1.png" alt=""></p>
+    <p hidden> <img id="slime-run-2" src="images/slime-run-2.png" alt=""></p>
+    <p hidden> <img id="slime-run-3" src="images/slime-run-3.png" alt=""></p>
+    <p hidden> <img id="slime-run-4" src="images/slime-run-4.png" alt=""></p>
+    <p hidden> <img id="slime-run-5" src="images/slime-run-5.png" alt=""></p>
+    <p hidden> <img id="slime-attack-0" src="images/slime-attack-0.png" alt=""></p>
+    <p hidden> <img id="slime-attack-1" src="images/slime-attack-1.png" alt=""></p>
+    <p hidden> <img id="slime-attack-2" src="images/slime-attack-2.png" alt=""></p>
+    <p hidden> <img id="slime-attack-3" src="images/slime-attack-3.png" alt=""></p>
+    <p hidden> <img id="slime-attack-4" src="images/slime-attack-4.png" alt=""></p>
+    <p hidden> <img id="slime-attack-5" src="images/slime-attack-5.png" alt=""></p>
+    <p hidden> <img id="slime-attack-6" src="images/slime-attack-6.png" alt=""></p>
+    <p hidden> <img id="slime-attack-7" src="images/slime-attack-7.png" alt=""></p>
+
+    <p hidden> <img id="minotaur-idle-0" src="images/minotaur-idle-0.png" alt=""></p>
+    <p hidden> <img id="minotaur-idle-1" src="images/minotaur-idle-1.png" alt=""></p>
+    <p hidden> <img id="minotaur-idle-2" src="images/minotaur-idle-2.png" alt=""></p>
+    <p hidden> <img id="minotaur-idle-3" src="images/minotaur-idle-3.png" alt=""></p>
+    <p hidden> <img id="minotaur-hurt-0" src="images/minotaur-hurt-0.png" alt=""></p>
+    <p hidden> <img id="minotaur-hurt-1" src="images/minotaur-hurt-1.png" alt=""></p>
+    <p hidden> <img id="minotaur-hurt-2" src="images/minotaur-hurt-2.png" alt=""></p>
+    <p hidden> <img id="minotaur-hurt-3" src="images/minotaur-hurt-3.png" alt=""></p>
+    <p hidden> <img id="minotaur-run-0" src="images/minotaur-run-0.png" alt=""></p>
+    <p hidden> <img id="minotaur-run-1" src="images/minotaur-run-1.png" alt=""></p>
+    <p hidden> <img id="minotaur-run-2" src="images/minotaur-run-2.png" alt=""></p>
+    <p hidden> <img id="minotaur-run-3" src="images/minotaur-run-3.png" alt=""></p>
+    <p hidden> <img id="minotaur-run-4" src="images/minotaur-run-4.png" alt=""></p>
+    <p hidden> <img id="minotaur-run-5" src="images/minotaur-run-5.png" alt=""></p>
+    <p hidden> <img id="minotaur-attack-0" src="images/minotaur-attack-0.png" alt=""></p>
+    <p hidden> <img id="minotaur-attack-1" src="images/minotaur-attack-1.png" alt=""></p>
+    <p hidden> <img id="minotaur-attack-2" src="images/minotaur-attack-2.png" alt=""></p>
+    <p hidden> <img id="minotaur-attack-3" src="images/minotaur-attack-3.png" alt=""></p>
+    <p hidden> <img id="minotaur-attack-4" src="images/minotaur-attack-4.png" alt=""></p>
+    <p hidden> <img id="minotaur-attack-5" src="images/minotaur-attack-5.png" alt=""></p>
+    <p hidden> <img id="minotaur-attack-6" src="images/minotaur-attack-6.png" alt=""></p>
+    <p hidden> <img id="minotaur-attack-7" src="images/minotaur-attack-7.png" alt=""></p>
+    </div>
+    <div class="menu">
+        <button id="buttonStart" class="button-start">StartGame</button>
+
+        <button id="buttonAttack" class="button-start" style="display: none;">Attack</button>
+        <button id="buttonDefense" class="button-start" style="display: none;">Defense</button>
+
+    </div>
+    <div id="text">   
+        
+    </div>
+    <script src="rpg.js"></script>
 </body>
 </html>
