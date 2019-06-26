@@ -1,8 +1,19 @@
 let moving;
 let movingAttack;
+let x;
+let y;
+let musicBattle = document.getElementById('battle');
+let musicMenu = document.getElementById('menu');
+let musicAfter = document.getElementById('afterBattle');
+let musicGameover = document.getElementById('gameOver');
+let musickAttack = document.getElementById('kattack');
+let musicmAttack = document.getElementById('mattack');
+let musicsAttack = document.getElementById('sattack');
+let musicShield = document.getElementById('shield');
 let randomMonsterTurn = 0;
-let canvas = document.createElement("canvas");
-let context = canvas.getContext("2d");
+let canvas = document.createElement('canvas');
+let context = canvas.getContext('2d');
+let deadMonsters = 0;
 let textMoviments = document.getElementById('text')
 let getImagesHero = [document.getElementById("knight-frame2"), document.getElementById("knight-frame3"), document.getElementById("knight-frame4"),
 document.getElementById("knight-frame5"), document.getElementById("knight-moving0"), document.getElementById("knight-moving1"), 
@@ -27,13 +38,6 @@ document.getElementById('minotaur-attack-1'), document.getElementById('minotaur-
 document.getElementById('minotaur-attack-4'), document.getElementById('minotaur-attack-5'), document.getElementById('minotaur-attack-6'),
 document.getElementById('minotaur-attack-7')],
     ironhack: document.getElementById('ironhack')
-};
-
-document.getElementById("buttonStart").onclick = function() {
-    document.getElementById("buttonStart").setAttribute("style", "display: none;")
-    document.getElementById("buttonAttack").setAttribute("style", "display: inherit;")
-    document.getElementById("buttonDefense").setAttribute("style", "display: inherit;")
-    startGame();
 };
 
 const startGame = () => {
@@ -141,9 +145,6 @@ class Monster {
     }
 }
 
-let x = new Monster(1, Monsters[1].health, Monsters[1].strengthMin, Monsters[1].strengthMax, Monsters[1].shield, Monsters[1].positionX, Monsters[1].positionY, Monsters[1].sizeX, Monsters[1].sizeY);
-let y = new Hero(Level[0].health, Level[0].strengthMin, Level[0].strengthMax, Level[0].shield)
-
 const createBoard = () => {
 
     canvas.setAttribute('style', 'background-image: url(images/background_rift.png); background-repeat: no-repeat; background-size: cover;')
@@ -170,24 +171,15 @@ const turns = (turn) => {
         }
 }
 
-document.getElementById("buttonAttack").onclick = function() {
-    startAttackHero();
-    turns(false);
-}
-
-document.getElementById("buttonDefense").onclick = function() {
-    y.defense();
-    turns(false);
-}
-
 const MonsterTurn = () => {
     randomMonsterTurn = Math.floor(Math.random() * 10)
     if(x.health > 0){
-        if(randomMonsterTurn < 7){
+        if(randomMonsterTurn < 8){
             startAttackMonster();
         } else {
             console.log('Monster use defense')
             x.defense()
+            musicShield.play();
         };
         setTimeout(() => {
             turns(true);
@@ -314,6 +306,7 @@ const startAttackHero = () => {
             case 16:
                 context.drawImage(getImagesHero[9], 600, 100, 400, 400);
                 context.drawImage(x.name[5], x.positionX, x.positionY, x.sizeX, x.sizeY);
+                musickAttack.play();
                 countM += 1;
                 break;
             case 17:
@@ -324,7 +317,6 @@ const startAttackHero = () => {
             case 18:
                 context.drawImage(getImagesHero[11], 600, 100, 400, 400);
                 context.drawImage(x.name[7], x.positionX, x.positionY, x.sizeX, x.sizeY);
-
                 countM += 1;
                 break;
             case 19:
@@ -420,12 +412,16 @@ const startAttackMonster = () => {
             case 15:
                 context.drawImage(getImagesHero[13], 50, 100, 400, 400);
                 context.drawImage(x.name[16], 200, x.positionY, x.sizeX, x.sizeY);
+                if(x.health === 200){
+                    musicmAttack.play();
+                } else if (x.health === 100){
+                    musicsAttack.play();
+                }
                 countM += 1;
                 break;
             case 14:
                 context.drawImage(getImagesHero[13], 50, 100, 400, 400);
                 context.drawImage(x.name[17], 200, x.positionY, x.sizeX, x.sizeY);
-
                 countM += 1;
                 break;
             case 15:
@@ -441,7 +437,6 @@ const startAttackMonster = () => {
             case 17:
                 context.drawImage(getImagesHero[13], 50, 100, 400, 400);
                 context.drawImage(x.name[20], 200, x.positionY, x.sizeX, x.sizeY);
-
                 countM += 1;
                 break;
             case 18:
@@ -466,7 +461,14 @@ const checkWinnerOrLooser = () => {
         document.getElementById("buttonDefense").setAttribute("style", "display: none;")
         context.font = "100px fantasy";
         context.fillStyle = "white";
-        context.fillText('You killed the monster', 100, 300);
+        context.fillText('You killed the monster!', 100, 200);
+        context.fillText('Choose a new one', 200, 300);
+        context.fillText('to level up!', 350, 400);
+        deadMonsters += 1;
+        musicBattle.pause();
+        musicAfter.play();
+        document.getElementById("buttonSlime").setAttribute("style", "display: inherit;")
+        document.getElementById("buttonMinotaur").setAttribute("style", "display: inherit;")
         console.log('You killed the monster')
     } else if (y.health <0){
         clearInterval(moving);
@@ -476,8 +478,67 @@ const checkWinnerOrLooser = () => {
         document.getElementById("buttonDefense").setAttribute("style", "display: none;")
         context.font = "100px fantasy";
         context.fillStyle = "white";
-        context.fillText('You are died!', 320, 300);
+        context.fillText('You are died!', 320, 200);
+        context.fillText('Try killing a weak monster,', 50, 300);
+        context.fillText('to level up first!', 200, 400);
+        musicBattle.pause();
+        musicGameover.play();
+        document.getElementById("buttonSlime").setAttribute("style", "display: inherit;")
+        document.getElementById("buttonMinotaur").setAttribute("style", "display: inherit;")
         console.log('You are died!')
-
     }
+}
+
+document.getElementById('buttonSlime').onclick = () => {
+    musicGameover.pause();
+    musicAfter.pause();
+    musicMenu.play();
+    x = new Monster(0, Monsters[0].health, Monsters[0].strengthMin, Monsters[0].strengthMax, Monsters[0].shield, Monsters[0].positionX, Monsters[0].positionY, Monsters[0].sizeX, Monsters[0].sizeY);
+    if(deadMonsters <= 3){
+        y = new Hero(Level[0].health, Level[0].strengthMin, Level[0].strengthMax, Level[0].shield);
+    } else if (deadMonsters >= 3 && deadMonsters <= 6){
+        y = new Hero(Level[1].health, Level[1].strengthMin, Level[1].strengthMax, Level[1].shield);
+    } else {
+        y = new Hero(Level[2].health, Level[2].strengthMin, Level[2].strengthMax, Level[2].shield);
+    }
+    document.getElementById("buttonSlime").setAttribute("style", "display: none;")
+    document.getElementById("buttonMinotaur").setAttribute("style", "display: none;")
+    document.getElementById("buttonStart").setAttribute("style", "display: inherit;")
+}
+
+document.getElementById('buttonMinotaur').onclick = () => {
+    musicGameover.pause();
+    musicAfter.pause();
+    musicMenu.play();
+    x = new Monster(1, Monsters[1].health, Monsters[1].strengthMin, Monsters[1].strengthMax, Monsters[1].shield, Monsters[1].positionX, Monsters[1].positionY, Monsters[1].sizeX, Monsters[1].sizeY);
+    if(deadMonsters <= 3){
+        y = new Hero(Level[0].health, Level[0].strengthMin, Level[0].strengthMax, Level[0].shield);
+    } else if (deadMonsters >= 3 && deadMonsters <= 6){
+        y = new Hero(Level[1].health, Level[1].strengthMin, Level[1].strengthMax, Level[1].shield);
+    } else {
+        y = new Hero(Level[2].health, Level[2].strengthMin, Level[2].strengthMax, Level[2].shield);
+    }
+    document.getElementById("buttonSlime").setAttribute("style", "display: none;")
+    document.getElementById("buttonMinotaur").setAttribute("style", "display: none;")
+    document.getElementById("buttonStart").setAttribute("style", "display: inherit;")
+}
+
+document.getElementById("buttonStart").onclick = () => {
+    musicMenu.pause();
+    musicBattle.play();
+    document.getElementById("buttonStart").setAttribute("style", "display: none;")
+    document.getElementById("buttonAttack").setAttribute("style", "display: inherit;")
+    document.getElementById("buttonDefense").setAttribute("style", "display: inherit;")
+    startGame();
+};
+
+document.getElementById("buttonAttack").onclick = function() {
+    startAttackHero();
+    turns(false);
+}
+
+document.getElementById("buttonDefense").onclick = function() {
+    y.defense();
+    musicShield.play();
+    turns(false);
 }

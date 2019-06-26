@@ -8,6 +8,7 @@
     <title>RPGigio</title>
 </head>
 <body>
+    <h1>RPGigio</h1>
     <div id="game-board">
     <p hidden> <img id="knight-frame2" src="images/knight-frame2.png" alt=""></p>
     <p hidden> <img id="knight-frame3" src="images/knight-frame3.png" alt=""></p>
@@ -71,15 +72,44 @@
     <p hidden> <img id="minotaur-attack-7" src="images/minotaur-attack-7.png" alt=""></p>
     </div>
     <div class="menu">
-        <button id="buttonStart" class="button-start">StartGame</button>
+        <button id="buttonStart" class="button-start" style="display: none;">Start Fight!</button>
 
         <button id="buttonAttack" class="button-start" style="display: none;">Attack</button>
         <button id="buttonDefense" class="button-start" style="display: none;">Defense</button>
+
+        <button id="buttonSlime" class="button-start" style="display: inherit;">Slime</button>
+        <button id="buttonMinotaur" class="button-start" style="display: inherit;">Minotaur</button>
+
 
     </div>
     <div id="text">   
         
     </div>
+
+    <audio hidden id="menu" loop src="music/menu.mp3">
+    </audio>
+
+    <audio hidden id="kattack" src="music/kattack.mp3">
+    </audio>
+
+    <audio hidden id="mattack" src="music/minotaurAttack.mp3">
+    </audio>
+
+    <audio hidden id="sattack" src="music/slimeAttack.mp3">
+    </audio>
+
+    <audio hidden id="shield" src="music/shield.wav">
+    </audio>
+
+    <audio hidden id="afterBattle" loop src="music/afterBattle.mp3">
+    </audio>
+
+    <audio hidden id="gameOver" loop src="music/gameover.mp3">
+    </audio>
+
+    <audio hidden loop id="battle" >
+        <source src="music/battle.mp3" type="audio/mpeg">
+    </audio>
     <script src="rpg.js"></script>
 </body>
 </html>

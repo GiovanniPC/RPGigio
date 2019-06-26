@@ -3,10 +3,17 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
 }
+h1 {
+    display: flex;
+    justify-content: center;
+    color:black;
+    font-size: 120px;
+    font-family: fantasy;
+    margin: 0 !important;
+}
 #game-board {
     display: flex;
     justify-content: center;
-    margin-top: 3%;
 }
 .menu {
     display: flex;
@@ -23,7 +30,6 @@ body {
     color:white;
     font-size: 60px;
     font-family: fantasy;
-    margin-top: 10px;
     padding-top: 20px;
     display: flex;
     justify-content: center;
