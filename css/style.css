@@ -1,12 +1,22 @@
 body {
     background-image: url('../images/fundomaster.jpg');
-    background-size: cover;
+    background-size: 120%;
+    background-position-x: -50px;
     background-repeat: no-repeat;
 }
 h1 {
     display: flex;
     justify-content: center;
-    color:black;
+    color:sienna;
+    font-size: 120px;
+    font-family: fantasy;
+    margin: 0 !important;
+}
+
+#textMonster{
+    display: flex;
+    justify-content: center;
+    color:sienna;
     font-size: 120px;
     font-family: fantasy;
     margin: 0 !important;

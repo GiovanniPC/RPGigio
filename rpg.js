@@ -10,6 +10,9 @@ let musickAttack = document.getElementById('kattack');
 let musicmAttack = document.getElementById('mattack');
 let musicsAttack = document.getElementById('sattack');
 let musicShield = document.getElementById('shield');
+let musicIronhack = document.getElementById('iattack');
+let textMonster = document.getElementById('textMonster');
+
 let randomMonsterTurn = 0;
 let canvas = document.createElement('canvas');
 let context = canvas.getContext('2d');
@@ -37,7 +40,14 @@ document.getElementById('minotaur-run-4'), document.getElementById('minotaur-run
 document.getElementById('minotaur-attack-1'), document.getElementById('minotaur-attack-2'), document.getElementById('minotaur-attack-3'),
 document.getElementById('minotaur-attack-4'), document.getElementById('minotaur-attack-5'), document.getElementById('minotaur-attack-6'),
 document.getElementById('minotaur-attack-7')],
-    ironhack: document.getElementById('ironhack')
+    ironhack: [document.getElementById('ironhack'), document.getElementById('ironhack'), document.getElementById('ironhack'), 
+document.getElementById('ironhack'), document.getElementById('ironhack'), document.getElementById('ironhack'),
+document.getElementById('ironhack'), document.getElementById('ironhack'), document.getElementById('ironhack'),
+document.getElementById('ironhack'), document.getElementById('ironhack'), document.getElementById('ironhack'),
+document.getElementById('ironhack'), document.getElementById('ironhack'), document.getElementById('ironhack'),
+document.getElementById('ironhack'), document.getElementById('ironhack'), document.getElementById('ironhack'),
+document.getElementById('ironhack'), document.getElementById('ironhack'), document.getElementById('ironhack'),
+document.getElementById('ironhack')]
 };
 
 const startGame = () => {
@@ -49,9 +59,9 @@ const startGame = () => {
 }
 
 const Level = [
-    { health: 100, strengthMin: 10, strengthMax: 25, shield: 10 },
-    { health: 200, strengthMin: 25, strengthMax: 35, shield: 15 },
-    { health: 300, strengthMin: 35, strengthMax: 55, shield: 20 }
+    { health: 100, strengthMin: 10, strengthMax: 25, shield: 20 },
+    { health: 200, strengthMin: 25, strengthMax: 35, shield: 25 },
+    { health: 300, strengthMin: 35, strengthMax: 55, shield: 30 }
 ];
 
 class Hero {
@@ -93,9 +103,9 @@ class Hero {
 };
 
 const Monsters = [
-    { name: 'slime', health: 100, strengthMin: 10, strengthMax: 25, shield: 15, positionX: 850, positionY: 300, sizeX: 200, sizeY: 200 },
+    { name: 'slime', health: 100, strengthMin: 10, strengthMax: 20, shield: 15, positionX: 850, positionY: 300, sizeX: 200, sizeY: 200 },
     { name: 'minotaur', health: 200, strengthMin: 15, strengthMax: 35, shield: 25, positionX: 750, positionY: 0, sizeX: 500, sizeY: 500 },
-    { name: 'ironhack', health: 300, strengthMin: 30, strengthMax: 55, shield: 35, positionX: 750, positionY: 100, sizeX: 400, sizeY: 400 }
+    { name: 'ironhack', health: 300, strengthMin: 30, strengthMax: 45, shield: 35, positionX: 750, positionY: 100, sizeX: 400, sizeY: 400 }
 ];
 
 class Monster {
@@ -174,7 +184,7 @@ const turns = (turn) => {
 const MonsterTurn = () => {
     randomMonsterTurn = Math.floor(Math.random() * 10)
     if(x.health > 0){
-        if(randomMonsterTurn < 8){
+        if(randomMonsterTurn <= 8){
             startAttackMonster();
         } else {
             console.log('Monster use defense')
@@ -412,10 +422,12 @@ const startAttackMonster = () => {
             case 15:
                 context.drawImage(getImagesHero[13], 50, 100, 400, 400);
                 context.drawImage(x.name[16], 200, x.positionY, x.sizeX, x.sizeY);
-                if(x.health === 200){
+                if(x.shield === 25){
                     musicmAttack.play();
-                } else if (x.health === 100){
+                } else if (x.shield === 15){
                     musicsAttack.play();
+                } else if (x.shield === 35){
+                    musicIronhack.play();
                 }
                 countM += 1;
                 break;
@@ -490,6 +502,7 @@ const checkWinnerOrLooser = () => {
 }
 
 document.getElementById('buttonSlime').onclick = () => {
+    textMonster.innerText = '';
     musicGameover.pause();
     musicAfter.pause();
     musicMenu.play();
@@ -501,12 +514,14 @@ document.getElementById('buttonSlime').onclick = () => {
     } else {
         y = new Hero(Level[2].health, Level[2].strengthMin, Level[2].strengthMax, Level[2].shield);
     }
+    document.getElementById("buttonFinal").setAttribute("style", "display: none;")
     document.getElementById("buttonSlime").setAttribute("style", "display: none;")
     document.getElementById("buttonMinotaur").setAttribute("style", "display: none;")
     document.getElementById("buttonStart").setAttribute("style", "display: inherit;")
 }
 
 document.getElementById('buttonMinotaur').onclick = () => {
+    textMonster.innerText = '';
     musicGameover.pause();
     musicAfter.pause();
     musicMenu.play();
@@ -518,6 +533,7 @@ document.getElementById('buttonMinotaur').onclick = () => {
     } else {
         y = new Hero(Level[2].health, Level[2].strengthMin, Level[2].strengthMax, Level[2].shield);
     }
+    document.getElementById("buttonFinal").setAttribute("style", "display: none;")
     document.getElementById("buttonSlime").setAttribute("style", "display: none;")
     document.getElementById("buttonMinotaur").setAttribute("style", "display: none;")
     document.getElementById("buttonStart").setAttribute("style", "display: inherit;")
@@ -541,4 +557,29 @@ document.getElementById("buttonDefense").onclick = function() {
     y.defense();
     musicShield.play();
     turns(false);
+}
+
+document.onkeydown = (e) => {
+    if(e.keyCode === 73){
+        document.getElementById("buttonFinal").setAttribute("style", "display: inherit;")
+    }
+};
+
+document.getElementById('buttonFinal').onclick = () => {
+    textMonster.innerText = '';
+    musicGameover.pause();
+    musicAfter.pause();
+    musicMenu.play();
+    x = new Monster(2, Monsters[2].health, Monsters[2].strengthMin, Monsters[2].strengthMax, Monsters[2].shield, Monsters[2].positionX, Monsters[2].positionY, Monsters[2].sizeX, Monsters[2].sizeY);
+    if(deadMonsters <= 3){
+        y = new Hero(Level[0].health, Level[0].strengthMin, Level[0].strengthMax, Level[0].shield);
+    } else if (deadMonsters >= 3 && deadMonsters <= 6){
+        y = new Hero(Level[1].health, Level[1].strengthMin, Level[1].strengthMax, Level[1].shield);
+    } else {
+        y = new Hero(Level[2].health, Level[2].strengthMin, Level[2].strengthMax, Level[2].shield);
+    }
+    document.getElementById("buttonFinal").setAttribute("style", "display: none;")
+    document.getElementById("buttonSlime").setAttribute("style", "display: none;")
+    document.getElementById("buttonMinotaur").setAttribute("style", "display: none;")
+    document.getElementById("buttonStart").setAttribute("style", "display: inherit;")
 }
