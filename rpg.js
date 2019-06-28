@@ -490,7 +490,7 @@ const checkWinnerOrLooser = () => {
         document.getElementById("buttonDefense").setAttribute("style", "display: none;")
         context.font = "100px fantasy";
         context.fillStyle = "white";
-        context.fillText('You are died!', 320, 200);
+        context.fillText('You are dead!', 320, 200);
         context.fillText('Try killing a weak monster,', 50, 300);
         context.fillText('to level up first!', 200, 400);
         musicBattle.pause();
