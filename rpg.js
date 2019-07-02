@@ -103,7 +103,7 @@ class Hero {
 };
 
 const Monsters = [
-    { name: 'slime', health: 10, strengthMin: 10, strengthMax: 20, shield: 15, positionX: 850, positionY: 300, sizeX: 200, sizeY: 200 },
+    { name: 'slime', health: 100, strengthMin: 10, strengthMax: 20, shield: 15, positionX: 850, positionY: 300, sizeX: 200, sizeY: 200 },
     { name: 'minotaur', health: 200, strengthMin: 15, strengthMax: 35, shield: 25, positionX: 750, positionY: 0, sizeX: 500, sizeY: 500 },
     { name: 'ironhack', health: 300, strengthMin: 30, strengthMax: 45, shield: 35, positionX: 750, positionY: 100, sizeX: 400, sizeY: 400 }
 ];
